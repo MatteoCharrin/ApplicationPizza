@@ -5,13 +5,6 @@ SET foreign_key_checks = 0;
 CREATE DATABASE `PizzaZ` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `PizzaZ`;
 
-DROP TABLE IF EXISTS `T_CAL`;
-CREATE TABLE `T_CAL` (
-  `Jour_Ouvrable` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`Jour_Ouvrable`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
 DROP TABLE IF EXISTS `T_CLIENT`;
 CREATE TABLE `T_CLIENT` (
   `C_Telephone` int(11) NOT NULL,
@@ -27,10 +20,11 @@ CREATE TABLE `T_CLIENT` (
 
 DROP TABLE IF EXISTS `T_DETAIL_LIVRAISON`;
 CREATE TABLE `T_DETAIL_LIVRAISON` (
+  `Id` tinyint(11) NOT NULL,
   `REF_Livraison` tinyint(11) NOT NULL,
   `REF_Tarifs` tinyint(11) NOT NULL,
   `Quantite` int(11) NOT NULL,
-  PRIMARY KEY (`REF_Livraison`,`REF_Tarifs`),
+  PRIMARY KEY (`Id`),
   UNIQUE KEY `REF_Livraison` (`REF_Livraison`),
   UNIQUE KEY `REF_Tarifs` (`REF_Tarifs`),
   CONSTRAINT `T_DETAIL_LIVRAISON_ibfk_1` FOREIGN KEY (`REF_Tarifs`) REFERENCES `T_TARIFS` (`Id`),
@@ -40,9 +34,10 @@ CREATE TABLE `T_DETAIL_LIVRAISON` (
 
 DROP TABLE IF EXISTS `T_GARNITURE`;
 CREATE TABLE `T_GARNITURE` (
+  `Id` tinyint(11) NOT NULL,
   `REF_Ingredient` varchar(100) NOT NULL,
   `REF_Pizza` varchar(100) NOT NULL,
-  PRIMARY KEY (`REF_Ingredient`,`REF_Pizza`),
+  PRIMARY KEY (`Id`),
   KEY `REF_Ingredient` (`REF_Ingredient`),
   KEY `REF_Pizza` (`REF_Pizza`),
   CONSTRAINT `T_GARNITURE_ibfk_1` FOREIGN KEY (`REF_Ingredient`) REFERENCES `T_INGREDIENT` (`LIB_Ingredient`),
@@ -70,8 +65,7 @@ CREATE TABLE `T_LIVRAISON` (
   KEY `REF_Livreur` (`REF_Livreur`),
   KEY `REF_Client` (`REF_Client`),
   CONSTRAINT `T_LIVRAISON_ibfk_1` FOREIGN KEY (`REF_Client`) REFERENCES `T_CLIENT` (`C_Telephone`),
-  CONSTRAINT `T_LIVRAISON_ibfk_2` FOREIGN KEY (`REF_Livreur`) REFERENCES `T_LIVREUR` (`L_Telephone`),
-  CONSTRAINT `T_LIVRAISON_ibfk_3` FOREIGN KEY (`Date`) REFERENCES `T_CAL` (`Jour_Ouvrable`)
+  CONSTRAINT `T_LIVRAISON_ibfk_2` FOREIGN KEY (`REF_Livreur`) REFERENCES `T_LIVREUR` (`L_Telephone`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
