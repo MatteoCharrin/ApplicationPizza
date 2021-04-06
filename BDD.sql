@@ -1,7 +1,6 @@
 SET NAMES utf8;
 SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
-SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 CREATE DATABASE `Pizza` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `Pizza`;
@@ -75,16 +74,15 @@ CREATE TABLE `T_LIVRAISON` (
   KEY `REF_Livreur` (`REF_Livreur`),
   KEY `REF_Client` (`REF_Client`),
   CONSTRAINT `T_LIVRAISON_ibfk_1` FOREIGN KEY (`REF_Client`) REFERENCES `T_CLIENT` (`C_Telephone`),
-  CONSTRAINT `T_LIVRAISON_ibfk_2` FOREIGN KEY (`REF_Livreur`) REFERENCES `T_LIVREUR` (`L_Telephone`),
-  CONSTRAINT `T_LIVRAISON_ibfk_3` FOREIGN KEY (`Date`) REFERENCES `T_CAL` (`Jour_Ouvrable`)
+  CONSTRAINT `T_LIVRAISON_ibfk_2` FOREIGN KEY (`REF_Livreur`) REFERENCES `T_LIVREUR` (`L_Telephone`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 DROP TABLE IF EXISTS `T_LIVREUR`;
 CREATE TABLE `T_LIVREUR` (
   `L_Telephone` int(11) NOT NULL,
-  `L_Nom` int(11) NOT NULL,
-  `L_Prenom` int(11) NOT NULL,
+  `L_Nom` varchar(100) NOT NULL,
+  `L_Prenom` varchar(100) NOT NULL,
   PRIMARY KEY (`L_Telephone`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
