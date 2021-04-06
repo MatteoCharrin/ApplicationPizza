@@ -1,5 +1,3 @@
--- Adminer 4.7.8 MySQL dump
-
 SET NAMES utf8;
 SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
@@ -112,6 +110,3 @@ CREATE TABLE `T_TARIFS` (
   CONSTRAINT `T_TARIFS_ibfk_1` FOREIGN KEY (`REF_Pizza`) REFERENCES `T_PIZZA` (`Nom`),
   CONSTRAINT `T_TARIFS_ibfk_2` FOREIGN KEY (`REF_Taille`) REFERENCES `T_TAILLE` (`LIB_Taille`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
--- 2021-04-06 08:33:42
